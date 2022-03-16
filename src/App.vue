@@ -6,7 +6,7 @@
           <li v-for="(item,i) in film" :key="i">
             <ol>{{item.title}}</ol>
             <ol>{{item.original_title}}</ol>
-            <ol>{{item.original_language}}</ol>
+            <ol ><img :src="bandiera(item.original_language)" alt="">    {{item.original_language}}</ol>
             <ol>{{item.vote_average}}</ol>
           </li>
         </ul>
@@ -20,6 +20,7 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import SearchBar from './components/SearchBar.vue'
+
 
 export default {
   name: 'App',
@@ -46,8 +47,27 @@ export default {
         this.film = res.data.results;
         console.log(this.film)
       })
-
+      axios.get('https://api.themoviedb.org/3/search/movie', {
+        params: {
+          api_key: '8fa780c148ee8959c5bfe762a4b106c2',
+          query: ricercaUtente,
+          language: 'it-IT',
+        }
+      })
+      .then( res => {
+        // console.log(res.data);
+        this.film = res.data.results;
+        console.log(this.film)
+      })
       
+    },
+    bandiera: function(lingua){
+      if (lingua == 'en') {
+        lingua = 'gb';
+        return ('https://flagcdn.com/16x12/' + lingua + '.png')
+      } else {
+        return ('https://flagcdn.com/16x12/' + lingua + '.png')
+      }
     }
   }
 }
