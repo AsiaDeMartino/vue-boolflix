@@ -1,7 +1,7 @@
 <template>
   <div class="search d-flex justify-content-end p-4">
-    <input class="form-control me-3" type="search" placeholder="Search">
-    <button class="btn btn-outline-light" type="submit">Search</button>
+    <input @keyup.enter="cercaFilm" v-model="inputSearch" class="form-control me-3" type="search" placeholder="Search">
+    <button @click="cercaFilm" class="btn btn-outline-light" type="submit">Search</button>
 
   </div>
 </template>
@@ -10,6 +10,16 @@
 
 export default {
   name: 'SearchBar',
+  data() {
+    return {
+      inputSearch: '',
+    }
+  },
+  methods: {
+    cercaFilm: function() {
+      this.$emit('cerca',this.inputSearch)
+    }
+  }
 
 }
 </script>
