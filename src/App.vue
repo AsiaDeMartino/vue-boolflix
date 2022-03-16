@@ -4,9 +4,11 @@
       <div>
         <ul>
           <li v-for="(item,i) in film" :key="i">
-            <ol>{{item.title}}</ol>
-            <ol>{{item.original_title}}</ol>
-            <ol ><img :src="bandiera(item.original_language)" alt="">    {{item.original_language}}</ol>
+            <ol v-if="item.title">{{item.title}}</ol>
+            <ol v-if="item.name">{{item.name}}</ol>
+            <ol v-if="item.original_title">{{item.original_title}}</ol>
+            <ol v-if="item.original_name">{{item.original_name}}</ol>
+            <ol ><img :src="bandiera(item.original_language)" :alt="item.original_language"></ol>
             <ol>{{item.vote_average}}</ol>
           </li>
         </ul>
@@ -47,7 +49,7 @@ export default {
         this.film = res.data.results;
         console.log(this.film)
       })
-      axios.get('https://api.themoviedb.org/3/search/movie', {
+      axios.get('https://api.themoviedb.org/3/search/tv', {
         params: {
           api_key: '8fa780c148ee8959c5bfe762a4b106c2',
           query: ricercaUtente,
@@ -56,8 +58,8 @@ export default {
       })
       .then( res => {
         // console.log(res.data);
-        this.film = res.data.results;
-        console.log(this.film)
+        this.film.push(...res.data.results);
+        console.log(this.film);
       })
       
     },

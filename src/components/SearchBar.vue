@@ -1,8 +1,10 @@
 <template>
-  <div class="search d-flex justify-content-end p-4">
-    <input @keyup.enter="cercaFilm" v-model="inputSearch" class="form-control me-3" type="search" placeholder="Search">
-    <button @click="cercaFilm" class="btn btn-outline-light" type="submit">Search</button>
-
+  <div class="search d-flex justify-content-between p-4">
+    <img src="../assets/logo-netflix.png" alt="">
+    <div class="d-flex">
+      <input @keyup.enter="cercaFilm" v-model="inputSearch" class="form-control me-3" type="search" placeholder="Search">
+      <button @click="cercaFilm" class="btn btn-outline-light" type="submit">Search</button>
+    </div>
   </div>
 </template>
 
@@ -28,8 +30,14 @@ export default {
 .search{
   height: 10vh;
   background-color: rgba(white, 0.1);
+
   input{
-    width: 25%;
+    width: 300px;
   }
+
+  img{
+    height: 6vh;
+  }
+
 }
 </style>
