@@ -2,8 +2,10 @@
   <div id="app">
       <SearchBar @cerca="cerca" />
       <div>
-        <ul>
+        <ul class="d-flex mt-5 justify-content-center flex-wrap gap-5">
           <li v-for="(item,i) in film" :key="i">
+            <img v-if="item.poster_path" :src="locandina(item.poster_path)" alt="">
+            <img class="poster_placeholder" v-else src="./assets/poster-placeholder.png" alt="">
             <ol v-if="item.title">{{item.title}}</ol>
             <ol v-if="item.name">{{item.name}}</ol>
             <ol v-if="item.original_title">{{item.original_title}}</ol>
@@ -70,17 +72,33 @@ export default {
       } else {
         return ('https://flagcdn.com/16x12/' + lingua + '.png')
       }
+    },
+    locandina: function(immagine){
+      return ('https://image.tmdb.org/t/p/w342' + immagine);
     }
   }
 }
 </script>
 
 <style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   background-color: rgb(26, 26, 26);
   height: 100vh;
   overflow: scroll;
   color: white;
+}
+
+li{
+  list-style: none;
+}
+
+.poster_placeholder{
+  width: 342px;
 }
 </style>

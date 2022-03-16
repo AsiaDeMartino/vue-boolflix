@@ -19,9 +19,10 @@ export default {
   },
   methods: {
     cercaFilm: function() {
-      this.$emit('cerca',this.inputSearch)
+      this.$emit('cerca',this.inputSearch);
+      this.inputSearch = '';
     }
-  }
+  },
 
 }
 </script>
