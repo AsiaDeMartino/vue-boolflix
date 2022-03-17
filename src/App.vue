@@ -12,6 +12,10 @@
             <ol v-if="item.original_name">{{item.original_name}}</ol>
             <ol ><img :src="bandiera(item.original_language)" :alt="item.original_language"></ol>
             <ol>{{item.vote_average}}</ol>
+            <ol class="stella">
+              <span v-html="stellaPiena(item.vote_average)"></span>  <!-- piena -->
+              <span v-html="stellaVuota(item.vote_average)"></span>   <!-- vuota -->
+            </ol>
           </li>
         </ul>
       </div>
@@ -75,6 +79,16 @@ export default {
     },
     locandina: function(immagine){
       return ('https://image.tmdb.org/t/p/w342' + immagine);
+    },
+    stellaPiena: function(voto){
+      let stelle;
+      stelle = parseInt(voto/2)
+      return ('&#9733; '.repeat(stelle))
+    },
+    stellaVuota: function(voto){
+      let stelle;
+      stelle = 5 - parseInt(voto/2)
+      return ('&#9734; '.repeat(stelle))
     }
   }
 }
@@ -100,5 +114,9 @@ li{
 
 .poster_placeholder{
   width: 342px;
+}
+
+.stella{
+  color: gold;
 }
 </style>
